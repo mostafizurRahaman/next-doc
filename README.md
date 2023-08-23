@@ -75,3 +75,12 @@ What import alias would you like configured? @/*
    latest features. If you're already familiar with Next.js, you'll find that
    the App Router is a natural evolution of the existing file-system based
    router in the Pages Router.
+
+## What is `"use client"` directive ?
+
+-  `"use client"` directive helps you to mark a component as client components.
+-  `"use client"` client must written on top before import anything.
+-  `"use client"` helps you to make client interaction. `"use client"` enable
+   react hooks like `useState`, `useEffect` , `useContext` on your application.
+-  `"use client"` helps you to add any event like `onClick()` , `onChange()`,
+   `onScroll()`, `onSubmit()` etc on your application.
