@@ -132,3 +132,52 @@ What import alias would you like configured? @/*
    -  first create a folder into app folder
    -  make page.js and write codes
    -  try load the page with link `http://localhost:3000/folder_name`
+
+## Link in Next JS :
+
+-  Link works like anchor tag .
+-  It helps us to navigate one route to another route.
+-  Link tag have a `props` name `href`.
+
+   ## how to use link tag
+
+   -  `import` Link from `next/link`;
+   -  Example:
+
+   ```js
+   import Link from "next/link";
+   import styles from "./Nav.module.css";
+
+   const Nav = () => {
+      return (
+         <nav className={styles.navigation}>
+            <Link href="/">Home</Link> <Link href="/login">Login Page</Link>
+            <Link href="/about">About</Link>{" "}
+         </nav>
+      );
+   };
+
+   export default Nav;
+   ```
+
+## `useRouter` hook in Next Js :-
+
+-  `import` useRouter hook from `'next/navigation'`
+-  store the variable on a variable. Example below:
+
+```js
+import { useRouter } from "next/navigation";
+
+const Page = () => {
+   const router = useRouter();
+};
+```
+
+-  useRouter return an object which contain many properties and functions like:
+   `push()`, `replace()`, `refresh()`, `back()`, `forword()`, `fastRefresh()`,
+   `reload()`
+   ### push() : used to navigate any route .
+   ### replace() : replace method use to replace any route.
+   ### refreash() : refresh method helps us to refreash any on browser.
+   ### back() : back method helps us to back privious route. back method call `windows.history.back()` method.
+   ### forword() : `forword()` method helps us to go forword any route we navigate before.
