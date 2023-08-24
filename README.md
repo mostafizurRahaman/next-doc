@@ -128,10 +128,20 @@ What import alias would you like configured? @/*
 ## Rouiting in Next JS :-
 
 -  ### Basic Routing / (file based routing) :
+
    -  Next Js uses file system based routing. example below:
    -  first create a folder into app folder
    -  make page.js and write codes
    -  try load the page with link `http://localhost:3000/folder_name`
+
+-  ### Nested Route :
+   -  It is basically a route within another route. Nested routes help in the
+      categorization of web pages.
+   -  first create a folder and open the folder
+   -  then create a sub folder and create file with name page.js
+   -  write code
+   -  try to load the file with the link
+      `http//localhost:3000/folder_name/folder_name`
 
 ## Link in Next JS :
 
@@ -176,8 +186,13 @@ const Page = () => {
 -  useRouter return an object which contain many properties and functions like:
    `push()`, `replace()`, `refresh()`, `back()`, `forword()`, `fastRefresh()`,
    `reload()`
-   ### push() : used to navigate any route .
-   ### replace() : replace method use to replace any route.
-   ### refreash() : refresh method helps us to refreash any on browser.
-   ### back() : back method helps us to back privious route. back method call `windows.history.back()` method.
-   ### forword() : `forword()` method helps us to go forword any route we navigate before.
+
+   ##### push() : used to navigate any route .
+
+   ##### replace() : replace method use to replace any route.
+
+   ##### refreash() : refresh method helps us to refreash any on browser.
+
+   ##### back() : back method helps us to back privious route. back method call `windows.history.back()` method.
+
+   ##### forword() : `forword()` method helps us to go forword any route we navigate before.
