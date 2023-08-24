@@ -84,3 +84,51 @@ What import alias would you like configured? @/*
    react hooks like `useState`, `useEffect` , `useContext` on your application.
 -  `"use client"` helps you to add any event like `onClick()` , `onChange()`,
    `onScroll()`, `onSubmit()` etc on your application.
+
+## Files and Folders :
+
+-  ### Top Level Folders:
+
+| Folder name | Details                            |
+| ----------- | ---------------------------------- |
+| `src`       | Optional Application source folder |
+| app         | App Router                         |
+| pages       | Pages Route                        |
+| public      | Static assets to be served         |
+
+-  ### Top Level Files:
+
+| Folder name         | Details                             |
+| ------------------- | ----------------------------------- |
+| `package.json`      | Project dependencies and scripts    |
+| `next.config.js`    | Configuration file for Next.js      |
+| `.gitignore`        | Git files and folders to ignore     |
+| `jsconfig.js`       | Configuration file for Js           |
+| `tsconfig.json`     | Configuration file for Typescript   |
+| `.eslintrc.json`    | Configuration file for ESLint       |
+| `postcss.config.js` | Configuration file for Tailwind CSS |
+| `.env`              | Contain Env Variables               |
+| `env.local`         | local Envrionment variable contains |
+| `middleware.ts`     | Next Js middleware request          |
+
+-  ### Routing Convention:
+
+| Folder name        | Details                      |
+| ------------------ | ---------------------------- |
+| `layout.js`        | for layout                   |
+| `page.js`          | for pages                    |
+| `loading.js`       | Loading UI                   |
+| `not-found`        | Not found page               |
+| `error.js`         | Error UI                     |
+| `global-error.js ` | Global Error UI              |
+| `route.js`         | Api end point                |
+| `.template.js`     | re-rendered layout           |
+| `default.js`       | parallal route fallback page |
+
+## Rouiting in Next JS :-
+
+-  ### Basic Routing / (file based routing) :
+   -  Next Js uses file system based routing. example below:
+   -  first create a folder into app folder
+   -  make page.js and write codes
+   -  try load the page with link `http://localhost:3000/folder_name`
