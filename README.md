@@ -152,11 +152,12 @@ What import alias would you like configured? @/*
    brackets: `[foldername]` . for Example : `[id]` or `[slug]`
 -  Then create a `page.js` file and write page component function with a
    `{params}` props.
--  `params` props can catch the dynamic `slug` or `id`
+-  `params` props return an object of `slug` or `id`.
+-  `params` props can catch the dynamic `slug` or `id`.
 -  Example Code Below:
 -  ```js
    const Page = ({ params }) => {
-      const id = params.id;
+      const id = params.id; // access the id property form params props.
       const teacherList = [
          {
             id: 0,
