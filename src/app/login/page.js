@@ -7,7 +7,6 @@ const Page = () => {
    console.log(router);
    return (
       <div>
-         <Nav></Nav>
          <h1>Login Page</h1>
          <button onClick={() => router.push("/login/studentLogin")}>
             Student login

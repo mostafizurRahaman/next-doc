@@ -196,3 +196,9 @@ const Page = () => {
    ##### back() : back method helps us to back privious route. back method call `windows.history.back()` method.
 
    ##### forword() : `forword()` method helps us to go forword any route we navigate before.
+
+## `usePathname()` Hook in next js :
+
+1. `usePathname()` hook return us a `string` or `array` of `pathname`.
+2. by using `usePathname`, we can conditionaly shows any component depends on
+   pathname.

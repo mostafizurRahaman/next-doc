@@ -12,7 +12,7 @@ const Page = () => {
    };
    return (
       <main>
-         <Nav></Nav>
+       
          <h1>Home Page </h1>
          {/* <User name="Mostafizur Rahaman"></User>
          <User name="Raju Ahmed"></User>

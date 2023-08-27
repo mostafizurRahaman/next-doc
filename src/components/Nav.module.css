@@ -2,5 +2,16 @@
    display: flex;
    align-items: center;
    gap: 20px;
-   color: black;
+   
+   list-style-type: none;
+   width: 100%;
+   background: black;
+   padding: 20px;
+}
+
+.navigation a {
+   text-decoration: none;
+   font-size: 20px;
+   text-transform: uppercase;
+   color: rgb(255, 255, 255);
 }
