@@ -187,8 +187,8 @@ What import alias would you like configured? @/*
             </h2>
          </div>
       );
-   };
-   ```
+    };
+```
 
 export default Page;
 
