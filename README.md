@@ -135,6 +135,7 @@ What import alias would you like configured? @/*
    -  try load the page with link `http://localhost:3000/folder_name`
 
 -  ### Nested Route :
+
    -  It is basically a route within another route. Nested routes help in the
       categorization of web pages.
    -  first create a folder and open the folder
@@ -142,6 +143,55 @@ What import alias would you like configured? @/*
    -  write code
    -  try to load the file with the link
       `http//localhost:3000/folder_name/folder_name`
+
+-  ### Dynamic Rotue :
+-  When you don't know the exact segment names ahead of time and want to create
+   routes from dynamic data, you can use Dynamic Segments that are filled in at
+   request time or prerendered at build time.
+-  A Dynamic Segment can be created by wrapping a folder's name in square
+   brackets: `[foldername]` . for Example : `[id]` or `[slug]`
+-  Then create a `page.js` file and write page component function with a
+   `{params}` props.
+-  `params` props can catch the dynamic `slug` or `id`
+-  Example Code Below:
+-  ```js
+   const Page = ({ params }) => {
+      const id = params.id;
+      const teacherList = [
+         {
+            id: 0,
+            name: "Mostafizur Rahaman",
+         },
+         {
+            id: 1,
+            name: "Ratul Hossain",
+         },
+         {
+            id: 2,
+            name: "Nayem Hossain",
+         },
+         {
+            id: 3,
+            name: "Ratul Hossain",
+         },
+      ];
+
+      const teacher = teacherList.find((i) => i.id === parseInt(id));
+
+      return (
+         <div>
+            <h1>student details</h1>
+            <h2>
+               Name: {teacher.name} - id: {teacher.id}
+            </h2>
+         </div>
+      );
+   };
+   ```
+
+export default Page;
+
+````
 
 ## Link in Next JS :
 
@@ -168,7 +218,7 @@ What import alias would you like configured? @/*
    };
 
    export default Nav;
-   ```
+````
 
 ## `useRouter` hook in Next Js :-
 
@@ -199,6 +249,6 @@ const Page = () => {
 
 ## `usePathname()` Hook in next js :
 
-1. `usePathname()` hook return us a `string` or `array` of `pathname`.
+1. `usePathname()` hook return us a `string` of `pathname`.
 2. by using `usePathname`, we can conditionaly shows any component depends on
    pathname.
