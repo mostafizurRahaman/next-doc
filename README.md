@@ -155,44 +155,76 @@ What import alias would you like configured? @/*
 -  `params` props return an object of `slug` or `id`.
 -  `params` props can catch the dynamic `slug` or `id`.
 -  Example Code Below:
+
 ```js
+const Page = ({ params }) => {
+   const id = params.id; // access the id property form params props.
+   const teacherList = [
+      {
+         id: 0,
+         name: "Mostafizur Rahaman",
+      },
+      {
+         id: 1,
+         name: "Ratul Hossain",
+      },
+      {
+         id: 2,
+         name: "Nayem Hossain",
+      },
+      {
+         id: 3,
+         name: "Ratul Hossain",
+      },
+   ];
+
+   const teacher = teacherList.find((i) => i.id === parseInt(id));
+
+   return (
+      <div>
+         <h1>student details</h1>
+         <h2>
+            Name: {teacher.name} - id: {teacher.id}
+         </h2>
+      </div>
+   );
+};
+export default Page;
+```
+
+### Catch-all Segments :
+
+-  Dynamic Segments can be extended to catch-all subsequent segments by adding
+   an ellipsis inside the brackets `[...folderName]`.
+-  For example, `app/shop/[...slug]/page.js` will match `/shop/clothes`, but
+   also `/shop/clothes/tops`, `/shop/clothes/tops/t-shirts`, and so on.
+
+-  | Route                        | Example URL  | params                 |
+   | ---------------------------- | ------------ | ---------------------- |
+   | `app/shop/[...slug]/page.js` | `shop/a `    | `slug:["a"]`           |
+   | `app/shop/[...slug]/page.js` | `shop/a/b `  | `slug:["a", "b"]`      |
+   | `app/shop/[...slug]/page.js` | `shop/a/b/c` | `slug:["a", "b", "c"]` |
+-  Create a catch all route segment:
+-  first create a folder with `..foldername` and wrapping with `[]`
+-  then create a page.js
+-  write a component with `params` props.
+-  `params` contains a `array of slug` or `paths`.
+-  Example below:
+
+   ```js
+   "use client";
    const Page = ({ params }) => {
-      const id = params.id; // access the id property form params props.
-      const teacherList = [
-         {
-            id: 0,
-            name: "Mostafizur Rahaman",
-         },
-         {
-            id: 1,
-            name: "Ratul Hossain",
-         },
-         {
-            id: 2,
-            name: "Nayem Hossain",
-         },
-         {
-            id: 3,
-            name: "Ratul Hossain",
-         },
-      ];
-
-      const teacher = teacherList.find((i) => i.id === parseInt(id));
-
+      const slug = params.slug;
+      console.log(slug);
       return (
          <div>
-            <h1>student details</h1>
-            <h2>
-               Name: {teacher.name} - id: {teacher.id}
-            </h2>
+            <h1>{slug.join(" >> ")}</h1>
          </div>
       );
-    };
-export default Page;
+   };
 
-
-
-```
+   export default Page;
+   ```
 
 ## Link in Next JS :
 
@@ -206,19 +238,19 @@ export default Page;
    -  Example:
 
    ```js
-      import Link from "next/link";
-      import styles from "./Nav.module.css";
+   import Link from "next/link";
+   import styles from "./Nav.module.css";
 
-      const Nav = () => {
-         return (
-            <nav className={styles.navigation}>
-               <Link href="/">Home</Link> <Link href="/login">Login Page</Link>
-               <Link href="/about">About</Link>{" "}
-            </nav>
-         );
-      };
+   const Nav = () => {
+      return (
+         <nav className={styles.navigation}>
+            <Link href="/">Home</Link> <Link href="/login">Login Page</Link>
+            <Link href="/about">About</Link>{" "}
+         </nav>
+      );
+   };
 
-      export default Nav;
+   export default Nav;
    ```
 
 ## `useRouter` hook in Next Js :-
@@ -227,11 +259,11 @@ export default Page;
 -  store the variable on a variable. Example below:
 
    ```js
-      import { useRouter } from "next/navigation";
+   import { useRouter } from "next/navigation";
 
-      const Page = () => {
-         const router = useRouter();
-      };
+   const Page = () => {
+      const router = useRouter();
+   };
    ```
 
 -  useRouter return an object which contain many properties and functions like:
