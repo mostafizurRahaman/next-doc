@@ -1,3 +1,4 @@
+"use client"
 const Page = ({ params }) => {
    const id = params.id;
    const teacherList = [
@@ -23,7 +24,7 @@ const Page = ({ params }) => {
 
    return <div>
          <h1>student details</h1>
-         <h2>Name: {teacher.name} - id: {teacher.id}</h2>
+         <h2>Name: {teacher?.name} - id: {teacher?.id}</h2>
    </div>;
 };
 

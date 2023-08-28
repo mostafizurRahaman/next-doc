@@ -226,6 +226,21 @@ export default Page;
    export default Page;
    ```
 
+## Create Custom 404 or Not-Found page in Next Js:-
+
+-  first create a file `not-found.js` in `app` folder
+-  write your code for 404 page
+-  try to load an unexiting route
+-  it's a global 404 route for your application.
+
+## Create a 404 or not found page for Specific route:
+
+-  go the specific folder: example : `/app/login`
+-  create a folder with elipses`...` + folderName and wrapping the folder with
+   `[ ]`. example : `[...not-found]`
+-  then create a page.js
+-  and write your code for specific 404 page
+
 ## Link in Next JS :
 
 -  Link works like anchor tag .
@@ -285,3 +300,37 @@ export default Page;
 1. `usePathname()` hook return us a `string` of `pathname`.
 2. by using `usePathname`, we can conditionaly shows any component depends on
    pathname.
+
+## Middleware in Next JS :
+
+-  Middleware allows you to run code before your code executed.
+-  Then, based on the request, you can modify the request by rewriting,
+   redirecting, modifying the request or response header.
+-  Middleware runs before content cached or routes are matched.
+-  There are two ways to define which paths Middleware will run on:
+
+   -  1. Custom Matcher config
+      ```js
+      export const config = {
+         // matcher: "/about/:path*", if single paths
+         matcher: ["/about/:path*", "/studentList/:path*"], // if multiple paths needed.
+      };
+      ```
+   -  2. Conditional statements :
+         ```js
+         export function middleware(request) {
+            if (request.nextUrl.pathname.startsWith("/about")) {
+               return NextResponse.redirect(new URL("/login", request.url));
+            }
+            if (request.nextUrl.pathname.startsWith("/studentList")) {
+               return NextResponse.redirect(new URL("/login", request.url));
+            }
+         }
+         ```
+
+
+-  ### Create a middleware function :
+
+   -  first create file in `src` folder `middleware.js` or `middleware.ts`
+   -  `import` {NextResponse} from 'next/server';
+   -
