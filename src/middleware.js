@@ -1,16 +1,20 @@
 import { NextResponse } from "next/server";
 
-export function middleware(request) {
-   // if (request.nextUrl.pathname.startsWith("/about")) {
-   //    return NextResponse.redirect(new URL("/login", request.url));
-   // }
-   // if (request.nextUrl.pathname.startsWith("/studentList")) {
-   //    return NextResponse.redirect(new URL("/login", request.url));
-   // }
-   console.log(request.url);
-   return NextResponse.redirect(new URL("/login", request.url));
-}
+/*
+//  for matcher : 
+export const middleware = (req) => {
+   return NextResponse.redirect(new URL("/login", req.url));
+};
 
 export const config = {
-   matcher: ["/about/:path*", "/studentList/:path*"],
+   matcher: "/about/:path*",
+};
+
+*/
+
+export const middleware = (req) => {
+   const pathname = req.nextUrl.pathname;
+   if (pathname.startsWith("/about")) {
+      return NextResponse.redirect(new URL("/login", req.url));
+   }
 };

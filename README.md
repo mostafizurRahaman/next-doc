@@ -328,9 +328,59 @@ export default Page;
          }
          ```
 
-
 -  ### Create a middleware function :
 
    -  first create file in `src` folder `middleware.js` or `middleware.ts`
    -  `import` {NextResponse} from 'next/server';
-   -
+   -  ```js
+
+      ```
+
+## What is Rendering ?
+
+-  Rendering is the process of converting source code to html and show on UI.
+-  Rendering converts the code you write into user interfaces.
+-  Two type of rendering are :
+   -  CSR -> Client Side Rendering
+   -  Serverside Rendering (Pre-Rendering)
+-  Server Side Rendering has two approch .
+   -  SSG -> Static Side Generation
+   -  SSR -> Server Site Rendering.
+
+## What is Pre-Rendering ?
+
+-  Pre-Rendering Means generate Html on server side.
+-  Type Of Pre-rendering :
+   -  SSG
+   -  SSR
+
+## What is SSR (Static Side Rendering) ?
+
+-  SSR Means Server Side Rendering.
+-  With SSR, You can rendering JavaScript code on Server side and return HTML
+   code to Client Side.
+-  With SSR , HTML Generated on each request.
+-  SSR only executed on server ,But ssr doesn't excuted on client browser.
+-  যখন ইউজার এর প্রতি রিকুয়েস্টে নতুন করে ডাটা জেনেরেট করতে হবে তখন আমরা SSR
+   ব্যবহার করবো।
+-  SSR Faster Then CSR (Client side Rendering)
+
+## What is SSG (Static Side Generation) ?
+
+-  SSG Means Static Side Generation.
+-  With SSG, You can render your JavaScript Files at build time and convert to
+   HTML Code.
+-  With SSG, Same Code will be reused and send to client.
+-  After generated Static files on built time , We store our static files on
+   Server.
+-  আর ইউজার রিকুয়েস্ট করার আগে যদি কোনো একটা ফাইল তৈরী করে রাখতে চাই এবং ইউজার
+   রিকুয়েস্ট করার সাথে সাথে দেখাবো সেই ক্ষেত্রে আমরা SSG ব্যবহার করবো ।
+-  SSG is Faster than SSR
+
+## What is CSR (Client Side Rendering) ?
+
+-  Client Side Rendering or Browser Rendering is a process where the browser
+   download the JavaScript, CSS, HTML Code, then render all file and display on
+   browser.
+-  CSR means client side rendering.
+-  CSR is not SEO Friendly
