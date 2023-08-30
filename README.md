@@ -364,6 +364,42 @@ export default Page;
 -  যখন ইউজার এর প্রতি রিকুয়েস্টে নতুন করে ডাটা জেনেরেট করতে হবে তখন আমরা SSR
    ব্যবহার করবো।
 -  SSR Faster Then CSR (Client side Rendering)
+-  ### Load data with SSR :
+
+   -  create a page and write a `async function` for page.
+   -  At same page, Write another `async function` to fetch data.
+   -  after fetching `return data`
+   -  then call the data into `page function` by using `await`;
+   - Example Below: 
+   ```js 
+         import Link from "next/link";
+         const getData = async () => {
+            const res = await fetch(`https://dummyjson.com/products?limit=20`);
+            const data = await res.json();
+            return data.products;
+         };
+
+         const Page = async () => {
+            const data = await getData();
+            return (
+               <div>
+                  <h1>Men Products</h1>
+                  <div className="container">
+                     {data.map((p) => (
+                        <div key={p.id} className="productCard">
+                           <h2>{p.title}</h2>
+                           <p>{p.brand}</p>
+                           <Link href={`/menproducts/${p.id}`}>Show Details</Link>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+            );
+         };
+
+         export default Page;
+
+   ```
 
 ## What is SSG (Static Side Generation) ?
 
@@ -390,40 +426,41 @@ export default Page;
 
    -  use `"use client"` directive top of the components.
    -  import `useEffect` and `useState` to load and store data.
-   -  then fetch data like below: 
-      ```js 
-      
-            "use client";
-                     import { useEffect, useState } from "react";
-                     import Link from "next/link";
+   -  then fetch data like below:
 
-                     const ProductList = () => {
-                        const [products, setProducts] = useState([]);
-                        console.log(products);
-                        useEffect(() => {
-                           const loadProduct = async () => {
-                              const res = await fetch(`https://dummyjson.com/products?limit=20`);
-                              const data = await res.json();
-                              setProducts(data.products);
-                           };
-                           loadProduct();
-                        }, []);
-                        return (
-                           <div>
-                              <h1>Product List</h1>
-                              <div className="container">
-                                 {products.map((p) => (
-                                    <div key={p.id} className="productCard">
-                                       <h2>{p.title}</h2>
-                                       <p>{p.brand}</p>
-                                       <Link href={`/productlist/${p.id}`}>Show Details</Link>
-                                    </div>
-                                 ))}
-                              </div>
-                           </div>
-                        );
-                     };
+      ```js
+         "use client";
+         import { useEffect, useState } from "react";
+         import Link from "next/link";
 
-                     export default ProductList;
+         const ProductList = () => {
+            const [products, setProducts] = useState([]);
+            console.log(products);
+            useEffect(() => {
+               const loadProduct = async () => {
+                  const res = await fetch(
+                     `https://dummyjson.com/products?limit=20`
+                  );
+                  const data = await res.json();
+                  setProducts(data.products);
+               };
+               loadProduct();
+            }, []);
+            return (
+               <div>
+                  <h1>Product List</h1>
+                  <div className="container">
+                     {products.map((p) => (
+                        <div key={p.id} className="productCard">
+                           <h2>{p.title}</h2>
+                           <p>{p.brand}</p>
+                           <Link href={`/productlist/${p.id}`}>Show Details</Link>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+            );
+         };
 
-         ```
+         export default ProductList;
+      ```
