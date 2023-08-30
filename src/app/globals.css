@@ -3,3 +3,25 @@
    padding: 0;
    box-sizing: border-box;
 }
+
+h1 {
+   color: #f00;
+   font-size: 25px;
+   text-align: center;
+   margin: 20px auto;
+   text-transform: uppercase;
+}
+
+.container {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 30px;
+}
+
+.productCard {
+   border: 2px solid #f00;
+   border-radius: 10px;
+   background: #000;
+   color: white;
+   padding: 20px 10px;
+}

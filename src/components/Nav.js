@@ -10,6 +10,7 @@ const Nav = () => {
          <Link href="/studentList">Student List page</Link>
          <Link href="/teacherList">Teacher List</Link>
          <Link href="/employlist">EmployList</Link>
+         <Link href="/productlist">Productlist</Link>
       </nav>
    );
 };
