@@ -370,35 +370,63 @@ export default Page;
    -  At same page, Write another `async function` to fetch data.
    -  after fetching `return data`
    -  then call the data into `page function` by using `await`;
-   - Example Below: 
-   ```js 
-         import Link from "next/link";
-         const getData = async () => {
-            const res = await fetch(`https://dummyjson.com/products?limit=20`);
-            const data = await res.json();
-            return data.products;
-         };
+   -  Example Below:
 
-         const Page = async () => {
-            const data = await getData();
-            return (
-               <div>
-                  <h1>Men Products</h1>
-                  <div className="container">
-                     {data.map((p) => (
-                        <div key={p.id} className="productCard">
-                           <h2>{p.title}</h2>
-                           <p>{p.brand}</p>
-                           <Link href={`/menproducts/${p.id}`}>Show Details</Link>
-                        </div>
-                     ))}
+   ```js
+   import Link from "next/link";
+   const getData = async () => {
+      const res = await fetch(`https://dummyjson.com/products?limit=20`);
+      const data = await res.json();
+      return data.products;
+   };
+
+   const Page = async () => {
+      const data = await getData();
+      return (
+         <div>
+            <h1>Men Products</h1>
+            <div className="container">
+               {data.map((p) => (
+                  <div key={p.id} className="productCard">
+                     <h2>{p.title}</h2>
+                     <p>{p.brand}</p>
+                     <Link href={`/menproducts/${p.id}`}>Show Details</Link>
                   </div>
-               </div>
-            );
-         };
+               ))}
+            </div>
+         </div>
+      );
+   };
 
-         export default Page;
+   export default Page;
+   ```
 
+   -  Generally after fetching data on next js , every data will be cached.
+   -  By using `{cache: 'no-store}` object as `second parameter of fetch` we can
+      avoid caching.
+   -  Example below:
+
+   ```js
+   import Image from "next/image";
+
+   const Page = async () => {
+      const res = await fetch("https://dog.ceo/api/breeds/image/random", {
+         cache: "no-store",
+      });
+      const data = await res.json();
+
+      return (
+         <main>
+            <h1>Home Page </h1>
+            <Image
+               src={data.message}
+               width={500}
+               height={300}
+               alt="dog_image"
+            ></Image>
+         </main>
+      );
+   };
    ```
 
 ## What is SSG (Static Side Generation) ?
@@ -429,38 +457,48 @@ export default Page;
    -  then fetch data like below:
 
       ```js
-         "use client";
-         import { useEffect, useState } from "react";
-         import Link from "next/link";
+      "use client";
+      import { useEffect, useState } from "react";
+      import Link from "next/link";
 
-         const ProductList = () => {
-            const [products, setProducts] = useState([]);
-            console.log(products);
-            useEffect(() => {
-               const loadProduct = async () => {
-                  const res = await fetch(
-                     `https://dummyjson.com/products?limit=20`
-                  );
-                  const data = await res.json();
-                  setProducts(data.products);
-               };
-               loadProduct();
-            }, []);
-            return (
-               <div>
-                  <h1>Product List</h1>
-                  <div className="container">
-                     {products.map((p) => (
-                        <div key={p.id} className="productCard">
-                           <h2>{p.title}</h2>
-                           <p>{p.brand}</p>
-                           <Link href={`/productlist/${p.id}`}>Show Details</Link>
-                        </div>
-                     ))}
-                  </div>
+      const ProductList = () => {
+         const [products, setProducts] = useState([]);
+         console.log(products);
+         useEffect(() => {
+            const loadProduct = async () => {
+               const res = await fetch(
+                  `https://dummyjson.com/products?limit=20`
+               );
+               const data = await res.json();
+               setProducts(data.products);
+            };
+            loadProduct();
+         }, []);
+         return (
+            <div>
+               <h1>Product List</h1>
+               <div className="container">
+                  {products.map((p) => (
+                     <div key={p.id} className="productCard">
+                        <h2>{p.title}</h2>
+                        <p>{p.brand}</p>
+                        <Link href={`/productlist/${p.id}`}>Show Details</Link>
+                     </div>
+                  ))}
                </div>
-            );
-         };
+            </div>
+         );
+      };
 
-         export default ProductList;
+      export default ProductList;
       ```
+
+## CSS In Next Js 13.4 :
+
+-  Next Js have some type of css:
+   -  Global CSS
+   -  CSS with styles attribute
+   -  moduler css
+
+
+

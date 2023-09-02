@@ -1,24 +1,20 @@
-"use client";
+import Image from "next/image";
 
-import { useState } from "react";
-import styles from "./page.module.css";
-import Link from "next/link";
-import Nav from "@/components/Nav";
+const Page = async () => {
+   const res = await fetch("https://dog.ceo/api/breeds/image/random", {
+      cache: "no-store",
+   });
+   const data = await res.json();
 
-const Page = () => {
-   const [name, setName] = useState("Ratul Hossain");
-   const handleAlert = () => {
-      setName("Rakib Hossain");
-   };
    return (
       <main>
-       
          <h1>Home Page </h1>
-         {/* <User name="Mostafizur Rahaman"></User>
-         <User name="Raju Ahmed"></User>
-         <User name="Robiul Hasan"></User> */}
-         {/* <h2>Name: {name} </h2>
-         <button onClick={handleAlert}>Click me to show alert</button> */}
+         <Image
+            src={data.message}
+            width={500}
+            height={300}
+            alt="dog_image"
+         ></Image>
       </main>
    );
 };

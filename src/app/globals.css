@@ -25,3 +25,21 @@ h1 {
    color: white;
    padding: 20px 10px;
 }
+
+.red {
+   color: red;
+   background: black;
+   padding: 20px;
+   font-size: 25px;
+   text-transform: uppercase;
+   font-weight: bold;
+}
+
+.green {
+   color: green;
+   background-color: orange;
+   padding: 20px;
+   font-size: 25px;
+   text-transform: uppercase;
+   font-weight: bold ;
+}
