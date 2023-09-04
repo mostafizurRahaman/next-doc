@@ -544,3 +544,46 @@ export default Page;
       }
    ```
 -  ### Image tag optimized images in nextjs and reduce sizes.
+
+## Font In Next Js:
+
+-  ### import font Next js google font. Example:
+
+   ```js
+   import { Roboto, Oswald } from "next/font/google";
+   ```
+
+-  ### Configure the font:
+   -  call the Font as funtion and store into a variable;
+   -  pass an object as parameter which have some properties like: weight,
+      styles, subsets, display
+      ```js
+      import { Oswald } from "next/font/google";
+      const oswald = Oswald({
+         weight: "700",
+         style: "normal",
+         subsets: ["latin"],
+         display: "swap",
+      });
+      ```
+-  ### How to use the font:
+
+   -  In `className` attribute you can pass the FontVariable.ClassName.
+   -  ```js
+         import { Oswald } from "next/font/google";
+         const oswald = Oswald({
+            weight: "700",
+            style: "normal",
+            subsets: ["latin"],
+            display: "swap",
+         });
+         const page = () => {
+            return (
+               <div>
+                  <h1 className={oswald.className}>Mostaifizur Rahaman</h1>
+                  <h1>Universe It</h1>
+               </div>
+            );
+         };
+      ```
+
