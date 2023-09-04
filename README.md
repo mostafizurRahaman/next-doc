@@ -500,5 +500,47 @@ export default Page;
    -  CSS with styles attribute
    -  moduler css
 
+## Image Optimization In Next Js :
 
+-  ### Use `Image` tag of next js:
+   -  import `Image` tag from `'next/image'`
+   -  add `src`, `width`, `height` attribute in next js .
+   -  Example:
+      ```js
+      <Image
+         src={data.message}
+         width={500}
+         height={300}
+         alt="dog_image"
+      ></Image>
+      ```
+-  ### External Domain Image configuration:
 
+   -  open `next.config.js` and an object like below:
+   -  Example :
+   -  ```js
+      /** @type {import('next').NextConfig} */
+      const nextConfig = {
+         images: {
+            domains: ["images.dog.ceo"],
+         },
+      };
+
+      module.exports = nextConfig;
+      ```
+
+   ```
+
+   ```
+
+-  ### When we Import image from our folder its reutrn us an object like below:
+   ```js
+      {
+            src: '/_next/static/media/vercel.3c8eefce.svg',
+            height: 64,
+            width: 283,
+            blurWidth: 0,
+            blurHeight: 0
+      }
+   ```
+-  ### Image tag optimized images in nextjs and reduce sizes.
