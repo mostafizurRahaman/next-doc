@@ -622,29 +622,50 @@ export default Page;
 -  Script Component optimized the script loading time.
 -  Script Components has some attributes like: `src`.
 -  And have some `Event Function ` like : `onLoad()`, `onError()`, `onReady()`
-- Example : 
-      ```js
-         "use client";
-         import Script from "next/script";
+-  Example :
 
-         const Page = () => {
-            return (
-               <div>
-                  <div>Load Script in Next js</div>
-                  <h1>Generate Meta data.</h1>
-                  <Script
-                     src="/geo.js"
-                     onLoad={() => {
-                        console.log(`onLoad`);
-                     }}
-                     onReady={() => {
-                        console.log(`onready`);
-                     }}
-                     onError={() => {
-                        console.log("On error");
-                     }}
-                  />
-               </div>
-            );
-         };
-      ```
+   ```js
+   "use client";
+   import Script from "next/script";
+
+   const Page = () => {
+      return (
+         <div>
+            <div>Load Script in Next js</div>
+            <h1>Generate Meta data.</h1>
+            <Script
+               src="/geo.js"
+               onLoad={() => {
+                  console.log(`onLoad`);
+               }}
+               onReady={() => {
+                  console.log(`onready`);
+               }}
+               onError={() => {
+                  console.log("On error");
+               }}
+            />
+         </div>
+      );
+   };
+   ```
+
+## `Loader` in Next JS:
+
+-  create a `loading.js` file
+-  And write a code for loader which you want to display on your ui.
+- Example: 
+```js
+      const loading = () => {
+      return (
+         <div className="relative h-screen">
+            <div className="w-10 h-10 border-2 animate-spin border-red-500 rounded-full absolute left-[50%] top-1/2 translate-x-1/2 translate-y-1/2 ">
+               Loading...
+            </div>
+         </div>
+      );
+   };
+
+   export default loading;
+
+```
