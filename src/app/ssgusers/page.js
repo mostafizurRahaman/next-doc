@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const page = async () => {
    const users = await getUsers();
+   
 
    return (
       <div className="grid grid-cols-3 gap-5 my-10">
