@@ -1,15 +1,22 @@
 import Link from "next/link";
-
+import { Roboto } from "next/font/google";
 const getData = async () => {
    const res = await fetch(`https://dummyjson.com/products?limit=20`);
    const data = await res.json();
    return data.products;
 };
 
+const roboto = Roboto({
+   weight: "100",
+   display: "swap",
+   subsets: ["latin"],
+   style: "normal",
+});
+
 const Page = async () => {
    const data = await getData();
    return (
-      <div>
+      <div className={roboto.className}>
          <h1>Men Products</h1>
          <div className="container">
             {data.map((p) => (

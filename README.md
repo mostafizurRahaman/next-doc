@@ -570,21 +570,81 @@ export default Page;
 
    -  In `className` attribute you can pass the FontVariable.ClassName.
    -  ```js
-         import { Oswald } from "next/font/google";
-         const oswald = Oswald({
-            weight: "700",
-            style: "normal",
-            subsets: ["latin"],
-            display: "swap",
-         });
-         const page = () => {
+      import { Oswald } from "next/font/google";
+      const oswald = Oswald({
+         weight: "700",
+         style: "normal",
+         subsets: ["latin"],
+         display: "swap",
+      });
+      const page = () => {
+         return (
+            <div>
+               <h1 className={oswald.className}>Mostaifizur Rahaman</h1>
+               <h1>Universe It</h1>
+            </div>
+         );
+      };
+      ```
+
+   -  [Read The
+      docs]!(https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
+
+## Generate Dynamic Meta Data with `generateMetadata` Function :
+
+-  create a page.
+-  write the code for page.
+-  For generating metadata, create a `generateMetadata()` function and export
+   that for that page.
+-  ```js
+   const Page = () => {
+      return (
+         <div>
+            <h1>Generate Meta data.</h1>
+         </div>
+      );
+   };
+
+   export default Page;
+
+   export const generateMetadata = () => {
+      return {
+         title: "I am a fullstack developer",
+         description: "our company description",
+      };
+   };
+   ```
+
+## <Script/> Components in Next JS:
+
+-  Script components helps us to third party school or our custom script in next
+   js applicaiton.
+-  Script Component optimized the script loading time.
+-  Script Components has some attributes like: `src`.
+-  And have some `Event Function ` like : `onLoad()`, `onError()`, `onReady()`
+- Example : 
+      ```js
+         "use client";
+         import Script from "next/script";
+
+         const Page = () => {
             return (
                <div>
-                  <h1 className={oswald.className}>Mostaifizur Rahaman</h1>
-                  <h1>Universe It</h1>
+                  <div>Load Script in Next js</div>
+                  <h1>Generate Meta data.</h1>
+                  <Script
+                     src="/geo.js"
+                     onLoad={() => {
+                        console.log(`onLoad`);
+                     }}
+                     onReady={() => {
+                        console.log(`onready`);
+                     }}
+                     onError={() => {
+                        console.log("On error");
+                     }}
+                  />
                </div>
             );
          };
       ```
-
-   - [Read The docs]!(https://nextjs.org/docs/app/building-your-application/optimizing/fonts)

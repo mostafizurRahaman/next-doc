@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 
 import { usePathname, useRouter } from "next/navigation";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], weight: '500' });
 
 export const metadata = {
    title: "Next js project",
@@ -17,7 +17,7 @@ const RootLayout = ({ children }) => {
    const router = useRouter();
    return (
       <html lang="en">
-         <body>
+         <body className={inter.className}>
             {!pathname.startsWith("/login") && <Nav></Nav>}
             {children}
             <button onClick={() => router.push("/")}>Back to Home</button>
