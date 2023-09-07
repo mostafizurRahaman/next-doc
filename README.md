@@ -654,18 +654,48 @@ export default Page;
 
 -  create a `loading.js` file
 -  And write a code for loader which you want to display on your ui.
-- Example: 
+-  Example:
+
 ```js
-      const loading = () => {
-      return (
-         <div className="relative h-screen">
-            <div className="w-10 h-10 border-2 animate-spin border-red-500 rounded-full absolute left-[50%] top-1/2 translate-x-1/2 translate-y-1/2 ">
-               Loading...
-            </div>
+const loading = () => {
+   return (
+      <div className="relative h-screen">
+         <div className="w-10 h-10 border-2 animate-spin border-red-500 rounded-full absolute left-[50%] top-1/2 translate-x-1/2 translate-y-1/2 ">
+            Loading...
          </div>
-      );
-   };
+      </div>
+   );
+};
 
-   export default loading;
-
+export default loading;
 ```
+
+## Static Assets In Next js:
+
+-  Static Assets are stores on `public` folders.
+-  Next.js can serve static files, like `images`, under a folder called `public`
+   in the root directory. Files inside `public` can then be referenced by your
+   code starting from the base URL `(/)`
+-  Static Assets are not minified at build time.
+
+## What is build ?
+
+## Export Dynamic to Static HTML in Next Js:-
+
+1. Open `next.configs.js` file
+2. create an object with name `nextConfig` and add an properties `output`.
+3. `output` properties values must be `export`
+4. Example below:
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+   output: "export",
+};
+
+module.exports = nextConfig;
+```
+
+5. then run `npm run build` command.
+6. Then you find an new folder like `out`.
+7. Out folder contains all exported files.
