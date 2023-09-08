@@ -5,14 +5,17 @@
 
 ## Main Features in Next JS
 
-| First Header | Second Header                                                                                                                                    |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Routing      | Next js have file based routing that support layout, nested routing , error handling and more                                                    |
-| Rendering    | Next Js support client side and serverside rendering                                                                                             |
-| Data fetch   | By using next we can load data with `async/await`and extends `fetch` api request for `memorization`, `caching`, `revalidation`                   |
-| Styling      | Next js support moduler `css.` Next Js also have default `tailwind installation `option.                                                         |
-| TypeScript   | Improved support for TypeScript, with better type checking and more efficient compilation, as well as custom TypeScript Plugin and type checker. |
-| Optimization | `Image`, `script` , `Font` optimazation helps to increase user experience.                                                                       |
+## | First Header | Second Header || ------------ |
+
+| | Routing | Next js have file based routing that support layout, nested
+routing , error handling and more | | Rendering | Next Js support client side
+and serverside rendering | | Data fetch | By using next we can load data with
+`async/await`and extends `fetch` api request for `memorization`, `caching`,
+`revalidation` | | Styling | Next js support moduler `css.` Next Js also have
+default `tailwind installation `option. | | TypeScript | Improved support for
+TypeScript, with better type checking and more efficient compilation, as well as
+custom TypeScript Plugin and type checker. | | Optimization | `Image`, `script`
+, `Font` optimazation helps to increase user experience. |
 
 ## Next JS Installation
 
@@ -482,24 +485,26 @@ export default Page;
       export default SingleUsers;
       ```
 
-
 ## ISR - Incremental Static Regeneration:-
 
 -  ISR means incremental Static Site Generation.
 -  ISR helps us revalidated data after a spacific time.
--  For Incremeatal rendering, just pass an object `{next: {revalidated: 30}}` as second parameter of `fetch`
-- Example :
-   ```js 
-         
-      const getSingleUser = async (id) => {
-         let res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
-            next: {revalidate: 3600}
-         });
-         // if (!res.ok) throw new Error("Data is not loaded success fully");
-         if (!res.ok) return undefined;
-         res = await res.json();
-         return res;
-      };
+-  For Incremeatal rendering, just pass an object `{next: {revalidated: 30}}` as
+   second parameter of `fetch`
+-  Example :
+   ```js
+   const getSingleUser = async (id) => {
+      let res = await fetch(
+         `https://jsonplaceholder.typicode.com/users/${id}`,
+         {
+            next: { revalidate: 3600 },
+         }
+      );
+      // if (!res.ok) throw new Error("Data is not loaded success fully");
+      if (!res.ok) return undefined;
+      res = await res.json();
+      return res;
+   };
    ```
 
 ## What is CSR (Client Side Rendering) ?
@@ -553,61 +558,63 @@ export default Page;
 
       export default ProductList;
       ```
-## Fallback control for Routes: 
-- During Data fetching,  `if(res.ok !== true)` you need to `return undefined`;  
-- go to the single component, and check is data avaiable for this route or not? 
-- if not available , 
-- `import` `{notFound}` from `'next/navigation'`
-- Then add a condition like below: 
-- if data not found return data `notFound()` function.
-- Example: 
+
+## Fallback control for Routes:
+
+-  During Data fetching, `if(res.ok !== true)` you need to `return undefined`;
+-  go to the single component, and check is data avaiable for this route or not?
+-  if not available ,
+-  `import` `{notFound}` from `'next/navigation'`
+-  Then add a condition like below:
+-  if data not found return data `notFound()` function.
+-  Example:
+
    ```js
-      import { notFound } from "next/navigation";
-      const getComment = async (id) => {
-         let res = await fetch(
-            `https://jsonplaceholder.typicode.com/comments/${id}`,
+   import { notFound } from "next/navigation";
+   const getComment = async (id) => {
+      let res = await fetch(
+         `https://jsonplaceholder.typicode.com/comments/${id}`,
+         {
+            next: { revalidate: 3600 },
+         }
+      );
+
+      if (!res.ok) return undefined;
+
+      res = await res.json();
+      return res;
+   };
+
+   const Page = async ({ params }) => {
+      const comment = await getComment(params.id);
+      if (!comment?.id) return notFound();
+      return (
+         <div>
             {
-               next: { revalidate: 3600 },
+               <div className="p-5 flex gap-2 flex-col items-center justify-center  rounded-lg bg-violet-500  text-white ">
+                  <h2 className="text-2xl">{comment.name}</h2>
+                  <h3 className="text-xl">{comment.email}</h3>
+                  <p className="text-base">{comment.body}</p>
+               </div>
             }
-         );
+         </div>
+      );
+   };
 
-         if (!res.ok) return undefined;
+   export default Page;
 
-         res = await res.json();
-         return res;
-      };
+   export const generateStaticParams = async () => {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/comments`);
+      const data = await res.json();
 
-      const Page = async ({ params }) => {
-         const comment = await getComment(params.id);
-         if (!comment?.id) return notFound();
-         return (
-            <div>
-               {
-                  <div className="p-5 flex gap-2 flex-col items-center justify-center  rounded-lg bg-violet-500  text-white ">
-                     <h2 className="text-2xl">{comment.name}</h2>
-                     <h3 className="text-xl">{comment.email}</h3>
-                     <p className="text-base">{comment.body}</p>
-                  </div>
-               }
-            </div>
-         );
-      };
-
-      export default Page;
-
-      export const generateStaticParams = async () => {
-         const res = await fetch(`https://jsonplaceholder.typicode.com/comments`);
-         const data = await res.json();
-
-         return data.map((i) => ({
-            id: `${i.id}`,
-         }));
-      };
-
-   
+      return data.map((i) => ({
+         id: `${i.id}`,
+      }));
+   };
    ```
+
 ## CSS In Next Js 13.4 :
- 
+
 -  Next Js have some type of css:
    -  Global CSS
    -  CSS with styles attribute
@@ -812,3 +819,78 @@ module.exports = nextConfig;
 5. then run `npm run build` command.
 6. Then you find an new folder like `out`.
 7. Out folder contains all exported files.
+
+## Redirection in Next JS:-
+
+-  We redirect in next Js two ways :
+
+   -  ### By using `redirect` function from `next/navigation`;
+
+      -  `import` redirect from 'next/navigation'
+      -  Into component, call the `redirect()` function by passing `path` as
+         parameter.
+      -  Example :
+
+         ```js
+         import { redirect } from "next/navigation";
+         const Page = () => {
+            redirect("/");
+            return (
+               <div>
+                  <h1>Hello devs , I am a student of netUsers. </h1>
+                  <h1>
+                     Hello Devs, I am studnet a student of cumilla polytechnic
+                     institute.
+                  </h1>
+               </div>
+            );
+         };
+
+         export default Page;
+         ```
+
+      -  ### By using `Add Redirects Config ` in `next.config.js` file:
+
+         -  add an properties `redirects`:
+         -  `redirects` propeties contains an `async function`
+         -  the `async function` returns an `array of object`.
+         -  every `object` contains `3 properties` like below:
+
+            ```js
+                 redirect: async() => [
+                  {
+                     source: '/pathname',
+                     destination: "/",
+                     permanent: false,
+                  },
+                  {
+                     source: '/pathname',
+                     destination: '/,
+                     pernament: false,
+                  }
+               ]
+
+            ```
+
+         -  For dynamic route the configuration `source` properties value write
+            like: `/pathname/:slug`
+
+         ```js
+                redirect: async() => [
+                  {
+                     source: '/pathname/:slug',
+                     destination: '/',
+                     permanent: false,
+                  },
+                 {
+                    source: '/pathname',
+                    destination: "/",
+                    permanent: false,
+                 },
+                 {
+                    source: '/pathname',
+                    destination: '/,
+                    pernament: false,
+                 }
+              ]
+         ```
