@@ -8,12 +8,12 @@ const nextConfig = {
    redirects: async () => {
       return [
          {
-            source: "/netUsers",
+            source: "/contactus",
             destination: "/",
             permanent: false,
          },
          {
-            source: "/netUsers/:slug",
+            source: "/contactus/:id",
             destination: "/",
             permanent: false,
          },
