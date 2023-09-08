@@ -2,7 +2,9 @@ import getUsers from "@/libs/getUsers";
 import { notFound } from "next/navigation";
 
 const getSingleUser = async (id) => {
-   let res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+   let res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+      next: {revalidate: 3600}
+   });
    // if (!res.ok) throw new Error("Data is not loaded success fully");
    if (!res.ok) return undefined;
    res = await res.json();

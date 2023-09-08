@@ -441,43 +441,66 @@ export default Page;
    রিকুয়েস্ট করার সাথে সাথে দেখাবো সেই ক্ষেত্রে আমরা SSG ব্যবহার করবো ।
 -  SSG is Faster than SSR
 -  ### SSG - Data Loading :
+
    -  Create a dynamic route for loading single data.
    -  then create a page and load the singe users data by using `params`;
-   - then create a function `generateStaticParams()` and `export` the function. 
-   - `generateStaticParams()` returns an array of `id` or `slugs`. 
-   - For creating an `id`s object we load all users or items  data. 
-   - then `map` the data and `return` an `array of object` of `{`dynamic_folder_name`: item.value.toString()}`
-   - Example: 
+   -  then create a function `generateStaticParams()` and `export` the function.
+   -  `generateStaticParams()` returns an array of `id` or `slugs`.
+   -  For creating an `id`s object we load all users or items data.
+   -  then `map` the data and `return` an `array of object` of
+      `{`dynamic_folder_name`: item.value.toString()}`
+   -  Example:
+
       ```js
-         import getUsers from "@/libs/getUsers";
+      import getUsers from "@/libs/getUsers";
 
-         const getSingleUser = async (id) => {
-            let res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
-            res = await res.json();
-            return res;
-         };
+      const getSingleUser = async (id) => {
+         let res = await fetch(
+            `https://jsonplaceholder.typicode.com/users/${id}`
+         );
+         res = await res.json();
+         return res;
+      };
 
-         const SingleUsers = async ({ params }) => {
-               const u = await getSingleUser(params.id);
-               console.log(u);
-               return (
-                  <div className="bg-blue-500 mx-auto my-10 w-96 text-white p-5 flex items-center justify-center flex-col gap-3 rounded-lg">
-                     <h2>{u.name}</h2>
-                     <p>email: {u.email}</p>
-                  </div>
-               );
-         };
+      const SingleUsers = async ({ params }) => {
+         const u = await getSingleUser(params.id);
+         console.log(u);
+         return (
+            <div className="bg-blue-500 mx-auto my-10 w-96 text-white p-5 flex items-center justify-center flex-col gap-3 rounded-lg">
+               <h2>{u.name}</h2>
+               <p>email: {u.email}</p>
+            </div>
+         );
+      };
 
-         export const generateStaticParams = async () => {
-            const users = await getUsers();
+      export const generateStaticParams = async () => {
+         const users = await getUsers();
 
-            return users.map((u) => ({ id: u.id.toString() }));
-         };
+         return users.map((u) => ({ id: u.id.toString() }));
+      };
 
-         export default SingleUsers;
-
-      
+      export default SingleUsers;
       ```
+
+
+## ISR - Incremental Static Regeneration:-
+
+-  ISR means incremental Static Site Generation.
+-  ISR helps us revalidated data after a spacific time.
+-  For Incremeatal rendering, just pass an object `{next: {revalidated: 30}}` as second parameter of `fetch`
+- Example :
+   ```js 
+         
+      const getSingleUser = async (id) => {
+         let res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+            next: {revalidate: 3600}
+         });
+         // if (!res.ok) throw new Error("Data is not loaded success fully");
+         if (!res.ok) return undefined;
+         res = await res.json();
+         return res;
+      };
+   ```
 
 ## What is CSR (Client Side Rendering) ?
 
@@ -530,9 +553,61 @@ export default Page;
 
       export default ProductList;
       ```
+## Fallback control for Routes: 
+- During Data fetching,  `if(res.ok !== true)` you need to `return undefined`;  
+- go to the single component, and check is data avaiable for this route or not? 
+- if not available , 
+- `import` `{notFound}` from `'next/navigation'`
+- Then add a condition like below: 
+- if data not found return data `notFound()` function.
+- Example: 
+   ```js
+      import { notFound } from "next/navigation";
+      const getComment = async (id) => {
+         let res = await fetch(
+            `https://jsonplaceholder.typicode.com/comments/${id}`,
+            {
+               next: { revalidate: 3600 },
+            }
+         );
 
+         if (!res.ok) return undefined;
+
+         res = await res.json();
+         return res;
+      };
+
+      const Page = async ({ params }) => {
+         const comment = await getComment(params.id);
+         if (!comment?.id) return notFound();
+         return (
+            <div>
+               {
+                  <div className="p-5 flex gap-2 flex-col items-center justify-center  rounded-lg bg-violet-500  text-white ">
+                     <h2 className="text-2xl">{comment.name}</h2>
+                     <h3 className="text-xl">{comment.email}</h3>
+                     <p className="text-base">{comment.body}</p>
+                  </div>
+               }
+            </div>
+         );
+      };
+
+      export default Page;
+
+      export const generateStaticParams = async () => {
+         const res = await fetch(`https://jsonplaceholder.typicode.com/comments`);
+         const data = await res.json();
+
+         return data.map((i) => ({
+            id: `${i.id}`,
+         }));
+      };
+
+   
+   ```
 ## CSS In Next Js 13.4 :
-
+ 
 -  Next Js have some type of css:
    -  Global CSS
    -  CSS with styles attribute
