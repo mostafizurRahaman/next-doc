@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 const Page = () => {
-   
-      redirect("/");
+
+      // redirect("/");
    return (
       <div>
          <h1>Hello devs , I am a student of netUsers. </h1>
