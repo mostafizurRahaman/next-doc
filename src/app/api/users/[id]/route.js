@@ -14,3 +14,6 @@ export const GET = async (req, { params }) => {
 
    return NextResponse.json(user, { status: 200 });
 };
+
+
+
