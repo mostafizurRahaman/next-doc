@@ -36,18 +36,90 @@ export const GET = async () => {
 -  At first receive the `dynamic id` and convert it from `string` to `number`.
 -  then `find` the data for dynamic `id`
 -  then `return` the data;
-- Example: 
+-  Example:
+
    ```js
-         import { comments } from "@/utils/comments";
-         import { NextResponse } from "next/server";
+   import { comments } from "@/utils/comments";
+   import { NextResponse } from "next/server";
 
-         export const GET = async (req, { params }) => {
-            const id = parseInt(params.id);
-            const data = comments.find((i) => id === i.id);
-            if (!data?.id) {
-               return NextResponse.json({ message: "Data Not Found" }, { status: 403 });
-            }
-            return NextResponse.json(data, { status: 200 });
-         };
-
+   export const GET = async (req, { params }) => {
+      const id = parseInt(params.id);
+      const data = comments.find((i) => id === i.id);
+      if (!data?.id) {
+         return NextResponse.json(
+            { message: "Data Not Found" },
+            { status: 403 }
+         );
+      }
+      return NextResponse.json(data, { status: 200 });
+   };
    ```
+
+## POST API in Next JS :
+
+-  create :file_folder:`folder` and :page_with_curl: `route.js` file
+-  then create an `async function ` with name `POST`.
+-  The function have some parameters: `(req, content)`
+-  `Parse` the `req` with to `json` with `req.json()`
+-  `req.json()` `returns` a `Promise`.
+-  To parse the `promise` use `await` and you find the body object that you send
+   from UI with `fetch` method.
+
+-  Example:
+
+   ```js
+   export const POST = async (req) => {
+      const payload = await req.json();
+      if (!payload.title || !payload.body) {
+         return NextResponse.json(
+            {
+               reslut: "User data not found",
+               acknowledged: false,
+               success: false,
+            },
+            { status: 401 }
+         );
+      }
+
+      const newData = {
+         id: Date.now(),
+         ...payload,
+      };
+
+      return NextResponse.json(
+         { reslut: newData, acknowledged: true, success: true },
+         { status: 200 }
+      );
+   };
+   ```
+
+## Parse `request.body` in Next Js :
+
+-  The Api `function` have some `parameters`: like `(req, content)`
+-  `Parse` the `req` with to `json` with `req.json()`
+-  `req.json()` `returns` a `Promise`.
+-  To parse the `promise` use `await` and you find the body object that you send
+   from UI with `fetch` method.
+-  Example:
+
+```js
+export const POST = async (req) => {
+   const payload = await req.json();
+   if (!payload.title || !payload.body) {
+      return NextResponse.json(
+         { reslut: "User data not found", acknowledged: false, success: false },
+         { status: 401 }
+      );
+   }
+
+   const newData = {
+      id: Date.now(),
+      ...payload,
+   };
+
+   return NextResponse.json(
+      { reslut: newData, acknowledged: true, success: true },
+      { status: 200 }
+   );
+};
+```
