@@ -6,8 +6,9 @@ export const GET = async () => {
    return NextResponse.json(data, { status: 200 });
 };
 
-export const POST = async(req) => {
+export const POST = async (req) => {
    const payload = await req.json();
+
    if (!payload?.name || !payload?.email || !payload.age) {
       return NextResponse.json(
          { result: "No found any data", success: false },
@@ -20,3 +21,4 @@ export const POST = async(req) => {
       { status: 200 }
    );
 };
+

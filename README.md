@@ -123,3 +123,36 @@ export const POST = async (req) => {
    );
 };
 ```
+
+## `PUT` method In Next JS :
+
+-  Create a dynamic route :file_folder:`folder` and :page_with_curl:`route.js`
+   file.
+-  write an `async function` with {req, content} `parameter`.
+-  access `body` from `req` and access `params.id` from `content`.
+-  And update your data and send response after updated data.
+-  Example:
+
+```js
+export const PUT = async (req, content) => {
+   const payload = await req.json();
+   const id = content.params.id;
+   console.log(payload, id);
+   if (!payload?.email) {
+      return NextResponse.json(
+         { result: "Required Data not send", success: false },
+         { status: 401 }
+      );
+   }
+   const user = users.find((i) => i.id === parseInt(id));
+
+   if (!user?.id) {
+      return NextResponse.json(
+         { result: "Data not found", success: false },
+         { status: 401 }
+      );
+   }
+   user.email = payload.email;
+   return NextResponse.json({ user: user, success: false }, { status: 200 });
+};
+```
