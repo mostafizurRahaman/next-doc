@@ -22,7 +22,10 @@ const Page = async () => {
                   className="bg-violet-500 text-white capitalize flex items-center justify-center gap-3 flex-col "
                >
                   <h2>Name: {i.name}</h2>
-                  <Link href={`/users/${i.id}`}>Click me</Link>
+                  <div className="flex items-center justify-between w-full gap-3 px-5">
+                     <Link href={`/users/${i.id}`}>Click me</Link>
+                     <Link href={`/users/${i.id}/update`}>Edit</Link>
+                  </div>
                </div>
             ))}
          </div>
