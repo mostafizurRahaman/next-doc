@@ -180,5 +180,5 @@ export const DELETE = async (req, { params }) => {
    const newUsers = users.filter((i) => i.id !== user.id);
    return NextResponse.json({ users: newUsers }, { status: 200 });
 };
-};
+
 ```
