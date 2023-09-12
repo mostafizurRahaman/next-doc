@@ -29,3 +29,17 @@ export const PUT = async (req, { params }) => {
    user = body;
    return NextResponse.json({ data: user, success: true }, { status: 200 });
 };
+
+export const DELETE = async (req, { params }) => {
+   // const body = await req.json();
+   const id = +params.id;
+   const user = users.find((i) => i.id === id);
+   if (!user?.id) {
+      return NextResponse.json(
+         { result: "User not found", success: false },
+         { status: 401 }
+      );
+   }
+   const newUsers = users.filter((i) => i.id !== user.id);
+   return NextResponse.json({ users: newUsers }, { status: 200 });
+};

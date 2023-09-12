@@ -156,3 +156,29 @@ export const PUT = async (req, content) => {
    return NextResponse.json({ user: user, success: false }, { status: 200 });
 };
 ```
+
+## `Delete` method In Next JS :
+
+-  Create a :file_folder:folder and :page_with_curl:`route.js`;
+-  write an `async function` with {req, content} `parameter`.
+-  access `body` from `req` and access `params.id` from `content`.
+-  get the id and body and find the matching
+-  after find out the data , delete it.
+-  Example:
+
+```js
+export const DELETE = async (req, { params }) => {
+   // const body = await req.json();
+   const id = +params.id;
+   const user = users.find((i) => i.id === id);
+   if (!user?.id) {
+      return NextResponse.json(
+         { result: "User not found", success: false },
+         { status: 401 }
+      );
+   }
+   const newUsers = users.filter((i) => i.id !== user.id);
+   return NextResponse.json({ users: newUsers }, { status: 200 });
+};
+};
+```

@@ -14,11 +14,14 @@ const SingleUser = async ({ params }) => {
    const id = parseInt(params.id);
    const data = await getUser(id);
    if (!data?.id) return notFound();
+
+
    return (
       <div>
          <h1 className="text-xl ">Name: {data.name}</h1>
          <h2>Eamil: {data.email}</h2>
          <p>Roll: {data.roll}</p>
+         
       </div>
    );
 };
